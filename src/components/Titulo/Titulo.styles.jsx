@@ -3,5 +3,5 @@ import styled from "styled-components";
 export const TituloStyled = styled.h1`
   margin: 0;
   padding: 0;
-  color: white;
+  color: ${({ theme }) => theme.colors.primary};
 `;
