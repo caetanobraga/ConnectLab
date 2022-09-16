@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
-export const HeaderStyled = styled.header`
-  background-color: ${({ theme }) => theme.colors.secundary};
-  height: 80px;
+export const LoginStyled = styled.div`
   color: ${({ theme }) => theme.colors.primary};
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  width: 100%;
+  gap: 10px;
 `;

@@ -1,13 +1,13 @@
 export const light = {
   colors: {
-    primary: "#444486",
-    secundary: "#b69096",
+    primary: "#bbb5b5",
+    secundary: "black",
   },
 };
 
 export const dark = {
   colors: {
-    primary: "#0b0b0c",
-    secundary: "#e61332",
+    primary: "black",
+    secundary: "#bbb5b5",
   },
 };
