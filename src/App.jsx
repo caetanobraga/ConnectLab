@@ -1,18 +1,9 @@
-import {
-  Header,
-  Button,
-  Label,
-  Paper,
-  Titulo,
-  Container,
-  Input,
-  Main,
-} from "./components";
+import { Header, Button, Paper, Titulo, Container, Main } from "./components";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./Theme/GlobalStyle";
 import { dark, light } from "./Theme/themes";
 import { useState } from "react";
-import { Cadastrar, Login } from "./pages";
+import { Cadastrar, Login, Editar } from "./pages";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -29,7 +20,7 @@ function App() {
         </Container>
       </Header>
       <Main>
-        <Login />
+        <Editar></Editar>
       </Main>
     </ThemeProvider>
   );

@@ -1,14 +1,15 @@
-import { CadastrarStyled, FormCadastro } from "./Cadastrar.styles";
+import { EditarStyled, FormEdicao } from "./Editar.styles";
+
 import { Button, LabelInput, Paper } from "../../components";
 
-export const Cadastrar = () => {
+export const Editar = () => {
   return (
     <Paper>
-      <CadastrarStyled>
-        <h4>Cadastrar</h4>
-      </CadastrarStyled>
-      <FormCadastro>
-        <CadastrarStyled>
+      <EditarStyled>
+        <h4>Alterar meu perfil</h4>
+      </EditarStyled>
+      <FormEdicao>
+        <EditarStyled>
           <LabelInput>
             <label htmlFor="nomeCompleto">Nome completo*</label>
             <input
@@ -53,8 +54,8 @@ export const Cadastrar = () => {
               placeholder="Digite o numero mais o complemento"
             ></input>
           </LabelInput>
-        </CadastrarStyled>
-        <CadastrarStyled>
+        </EditarStyled>
+        <EditarStyled>
           <LabelInput>
             <label htmlFor="email">E-mail*</label>
             <input
@@ -98,14 +99,14 @@ export const Cadastrar = () => {
               type="text"
               placeholder="Digite seu bairro"
             ></input>
-          </LabelInput>{" "}
-        </CadastrarStyled>
-      </FormCadastro>
-      <CadastrarStyled>
-        <Button>Acessar</Button>
+          </LabelInput>
+        </EditarStyled>
+      </FormEdicao>
+      <EditarStyled>
+        <Button>Salvar</Button>
 
-        <a href="/">Cadastrar</a>
-      </CadastrarStyled>
+        <a href="/">Cancelar</a>
+      </EditarStyled>
     </Paper>
   );
 };

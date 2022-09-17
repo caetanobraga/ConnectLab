@@ -1,5 +1,5 @@
 import { LoginStyled } from "./Login.styles";
-import { Button, Input, Label, Paper } from "../../components";
+import { Button, LabelInput, Paper } from "../../components";
 import { ItemFormStyled } from "../Cadastrar/Cadastrar.styles";
 
 export const Login = () => {
@@ -7,14 +7,18 @@ export const Login = () => {
     <Paper>
       <LoginStyled>
         <h4>Acessar</h4>
-        <ItemFormStyled>
-          <Label>E-mail</Label>
-          <Input></Input>
-        </ItemFormStyled>
-        <ItemFormStyled>
-          <Label>Senha</Label>
-          <Input></Input>
-        </ItemFormStyled>
+        <LabelInput>
+          <label htmlFor="email">E-mail</label>
+          <input id="email" type="email" placeholder="Digite seu email"></input>
+        </LabelInput>
+        <LabelInput>
+          <label htmlFor="senha">Senha</label>
+          <input
+            id="senha"
+            type="password"
+            placeholder="Digite sua senha"
+          ></input>
+        </LabelInput>
         <Button>Acessar</Button>
 
         <a href="/">Cadastrar</a>
