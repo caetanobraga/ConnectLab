@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import axios from "axios";
 import * as yup from "yup";
 
 import { CadastrarStyled, FormCadastro } from "./Cadastrar.styles";
 import { Button, LabelInput, Paper } from "../../components";
 
 const campoObrigatorio = "Campo obrigatório";
+
+const baseURL = "https://connectlab.onrender.com/";
+const headers = { "Content-Type": "application/json" };
 
 const formSchema = yup.object({
   nomeCompleto: yup.string().required(campoObrigatorio),
@@ -18,7 +21,6 @@ const formSchema = yup.object({
       /^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$/,
       "Telefone deve ser no formato (xx) xxxxx-xxxx",
     ),
-
   senha: yup
     .string()
     .required(campoObrigatorio)
@@ -45,8 +47,34 @@ export const Cadastrar = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const handleConfirmarForm = (valores) => {
-    console.log(valores);
+  const handleConfirmarForm = (values) => {
+    const body = {
+      email: values.email,
+      password: values.senha,
+      fullName: values.nomeCompleto,
+      photoUrl: values.urlPerfil,
+      phone: values.telefone,
+      userAddress: {
+        zipCode: values.cep,
+        street: values.endereco,
+        number: values.numero,
+        neighborhood: values.bairro,
+        city: values.cidade,
+        state: values.estado,
+        complement: "",
+      },
+    };
+
+    axios
+      .post(baseURL + "auth/register/", body, headers)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(() => {
+        console.log("erro");
+      });
+
+    console.log(body);
   };
 
   const buscaCep = (e) => {
