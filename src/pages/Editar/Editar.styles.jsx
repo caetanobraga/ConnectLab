@@ -5,7 +5,7 @@ export const EditarStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
 `;
 
 export const FormEdicao = styled.div`

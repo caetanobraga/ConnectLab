@@ -1,11 +1,10 @@
 import { LoginStyled } from "./Login.styles";
 import { Button, LabelInput, Paper } from "../../components";
-import { ItemFormStyled } from "../Cadastrar/Cadastrar.styles";
 
 export const Login = () => {
   return (
     <Paper>
-      <LoginStyled>
+      {/* <LoginStyled>
         <h4>Acessar</h4>
         <LabelInput>
           <label htmlFor="email">E-mail</label>
@@ -22,7 +21,7 @@ export const Login = () => {
         <Button>Acessar</Button>
 
         <a href="/">Cadastrar</a>
-      </LoginStyled>
+      </LoginStyled> */}
     </Paper>
   );
 };

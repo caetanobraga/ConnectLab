@@ -15,6 +15,11 @@ export const LabelInputStyled = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.primary};
     border-radius: 5px;
     width: 358px;
-    height: 20px;
+    padding-left: 3px;
+    height: 25px;
+  }
+
+  & span {
+    color: red;
   }
 `;

@@ -10,12 +10,5 @@ export const CadastrarStyled = styled.div`
 
 export const FormCadastro = styled.div`
   display: flex;
-`;
-
-export const ItemFormStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  font-weight: bold;
-  font-size: smaller;
+  flex-direction: row;
 `;

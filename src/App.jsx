@@ -20,7 +20,7 @@ function App() {
         </Container>
       </Header>
       <Main>
-        <Editar></Editar>
+        <Cadastrar></Cadastrar>
       </Main>
     </ThemeProvider>
   );
