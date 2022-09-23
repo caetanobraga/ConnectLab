@@ -6,3 +6,4 @@ export { Container } from "./Container/Container";
 export { Main } from "./Main/Main";
 export { LabelInput } from "./LabelInput/LabelInput";
 export { Form } from "./Form/Form";
+export { CardProduto } from "./CardProduto/CardProduto";

@@ -4,6 +4,7 @@ import { GlobalStyle } from "./Theme/GlobalStyle";
 import { dark, light } from "./Theme/themes";
 import { useState } from "react";
 import { Cadastrar, Login, Editar } from "./pages";
+import { AppRoutes } from "./routes/AppRoutes";
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -20,7 +21,7 @@ function App() {
         </Container>
       </Header>
       <Main>
-        <Cadastrar></Cadastrar>
+        <AppRoutes />
       </Main>
     </ThemeProvider>
   );
