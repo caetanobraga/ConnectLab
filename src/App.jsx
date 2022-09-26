@@ -1,28 +1,29 @@
-import { Header, Button, Paper, Titulo, Container, Main } from "./components";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "./Theme/GlobalStyle";
-import { dark, light } from "./Theme/themes";
-import { useState } from "react";
-import { Cadastrar, Login, Editar } from "./pages";
-import { AppRoutes } from "./routes/AppRoutes";
+import { Header, Titulo, Container, Main, Button } from './components';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from './Theme/GlobalStyle';
+import { dark, light } from './Theme/themes';
+import { useState } from 'react';
+
+import { AppRoutes } from './routes/AppRoutes';
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './contexts/Authenticate';
+import { AppStyled } from './App.styles';
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState('dark');
 
   return (
-    <ThemeProvider theme={theme === "dark" ? dark : light}>
-      <GlobalStyle />
-      <Header>
-        <Container>
-          <Titulo>Connect Lab</Titulo>
-          <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-            Troca tema
-          </button>
-        </Container>
-      </Header>
-      <Main>
-        <AppRoutes />
-      </Main>
+    <ThemeProvider theme={theme === 'dark' ? light : dark}>
+      <BrowserRouter>
+        <AppStyled></AppStyled>
+        <AuthProvider>
+          <GlobalStyle />
+          <Header />
+          <Main>
+            <AppRoutes></AppRoutes>
+          </Main>
+        </AuthProvider>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

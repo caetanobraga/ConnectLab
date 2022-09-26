@@ -1,38 +1,40 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
-import * as yup from "yup";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
+import * as yup from 'yup';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/Authenticate';
+import { Button, LabelInput, Paper } from '../../components';
+import { CadastrarStyled, FormCadastro } from './Cadastrar.styles';
+import { ToastContainer } from 'react-toastify';
+import { notifyError } from '../../utils';
 
-import { CadastrarStyled, FormCadastro } from "./Cadastrar.styles";
-import { Button, LabelInput, Paper } from "../../components";
-
-const campoObrigatorio = "Campo obrigatório";
-
-const baseURL = "https://connectlab.onrender.com/";
-const headers = { "Content-Type": "application/json" };
+const campoObrigatorio = 'Campo obrigatório';
+const baseURL = 'https://connectlab.onrender.com/';
+const headers = { 'Content-Type': 'application/json' };
 
 const formSchema = yup.object({
   nomeCompleto: yup.string().required(campoObrigatorio),
-  urlPerfil: yup.string().url("URL inválida"),
-  email: yup.string().email("E-mail inválido").required(campoObrigatorio),
+  urlPerfil: yup.string().url('URL inválida'),
+  email: yup.string().email('E-mail inválido').required(campoObrigatorio),
   telefone: yup
     .string()
     .matches(
       /^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$/,
-      "Telefone deve ser no formato (xx) xxxxx-xxxx",
+      'Telefone deve ser no formato (xx) xxxxx-xxxx',
     ),
   senha: yup
     .string()
     .required(campoObrigatorio)
-    .min(8, "Deve ter no mínimo 8 caracteres"),
+    .min(8, 'Deve ter no mínimo 8 caracteres'),
   confirmacaoSenha: yup
     .string()
     .required(campoObrigatorio)
-    .oneOf([yup.ref("senha")], "Senha e confirmação devem ser iguais!"),
+    .oneOf([yup.ref('senha')], 'Senha e confirmação devem ser iguais!'),
   cep: yup
     .string()
     .required(campoObrigatorio)
-    .matches(/^[0-9]+$/, "Apenas números")
+    .matches(/^[0-9]+$/, 'Apenas números')
     .min(8)
     .max(8),
   endereco: yup.string().required(campoObrigatorio),
@@ -43,6 +45,7 @@ const formSchema = yup.object({
 });
 
 export const Cadastrar = () => {
+  const { authenticated } = useContext(AuthContext);
   const { register, handleSubmit, formState, setValue, setFocus } = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -61,17 +64,38 @@ export const Cadastrar = () => {
         neighborhood: values.bairro,
         city: values.cidade,
         state: values.estado,
-        complement: "",
+        complement: '',
       },
     };
 
+    if (authenticated) {
+      const logedUser = JSON.parse(localStorage.getItem('user'));
+      const token = localStorage.getItem('token');
+
+      const Headers = {
+        headers: 'Bearer ' + token,
+      };
+
+      axios
+        .put(baseURL + 'users/' + logedUser.id, body, Headers)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((erro) => {
+          console.log(erro.response.data.error);
+          notifyError(erro.response.data.error);
+        });
+      return;
+    }
+
     axios
-      .post(baseURL + "auth/register/", body, headers)
+      .post(baseURL + 'auth/register/', body, headers)
       .then((response) => {
         console.log(response);
       })
-      .catch(() => {
-        console.log("erro");
+      .catch((erro) => {
+        console.log(erro.response.data.error);
+        notifyError(erro.response.data.error);
       });
 
     console.log(body);
@@ -81,15 +105,15 @@ export const Cadastrar = () => {
     if (!e.target.value) {
       return;
     }
-    const cep = e.target.value.replace(/\D/g, "");
+    const cep = e.target.value.replace(/\D/g, '');
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((res) => res.json())
       .then((data) => {
-        setValue("endereco", data.logradouro);
-        setValue("bairro", data.bairro);
-        setValue("cidade", data.localidade);
-        setValue("estado", data.uf);
-        setFocus("numero");
+        setValue('endereco', data.logradouro);
+        setValue('bairro', data.bairro);
+        setValue('cidade', data.localidade);
+        setValue('estado', data.uf);
+        setFocus('numero');
       })
       .catch((err) => console.log(err));
   };
@@ -97,7 +121,7 @@ export const Cadastrar = () => {
   return (
     <Paper>
       <CadastrarStyled>
-        <h4>Cadastrar</h4>
+        {authenticated ? <h4>Editar</h4> : <h4>Cadastrar</h4>}
       </CadastrarStyled>
 
       <form onSubmit={handleSubmit(handleConfirmarForm)}>
@@ -106,7 +130,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="nomeCompleto">Nome completo*</label>
               <input
-                {...register("nomeCompleto")}
+                {...register('nomeCompleto')}
                 type="text"
                 id="nomeCompleto"
                 placeholder="Digite seu nome completo"
@@ -118,7 +142,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="urlPerfil">URL foto perfil</label>
               <input
-                {...register("urlPerfil")}
+                {...register('urlPerfil')}
                 id="urlPerfil"
                 type="text"
                 placeholder="foto de prefil"
@@ -130,7 +154,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="email">E-mail*</label>
               <input
-                {...register("email")}
+                {...register('email')}
                 id="email"
                 type="email"
                 placeholder="Digite seu e-mail"
@@ -142,7 +166,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="telefone">Telefone</label>
               <input
-                {...register("telefone")}
+                {...register('telefone')}
                 id="telefone"
                 type="text"
                 placeholder="(xx) xxxx-xxxxx"
@@ -154,7 +178,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="senha">Senha*</label>
               <input
-                {...register("senha")}
+                {...register('senha')}
                 id="senha"
                 type="password"
                 placeholder="Digite sua senha"
@@ -166,7 +190,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="confirmacaoSenha">Confirmação de senha*</label>
               <input
-                {...register("confirmacaoSenha")}
+                {...register('confirmacaoSenha')}
                 id="confirmacaoSenha"
                 type="password"
                 placeholder="Confirme sua senha"
@@ -180,7 +204,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="cep">CEP*</label>
               <input
-                {...register("cep")}
+                {...register('cep')}
                 id="cep"
                 type="text"
                 placeholder="Digite seu CEP"
@@ -193,7 +217,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="endereco">Endereço*</label>
               <input
-                {...register("endereco")}
+                {...register('endereco')}
                 id="endereco"
                 type="text"
                 placeholder="Digite seu endereço"
@@ -205,7 +229,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="numero">Número*</label>
               <input
-                {...register("numero")}
+                {...register('numero')}
                 defaultValue="0"
                 type="number"
                 placeholder="Digite o numero mais o complemento"
@@ -217,7 +241,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="bairro">Bairro*</label>
               <input
-                {...register("bairro")}
+                {...register('bairro')}
                 id="bairro"
                 type="text"
                 placeholder="Digite seu bairro"
@@ -229,7 +253,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="cidade">Cidade*</label>
               <input
-                {...register("cidade")}
+                {...register('cidade')}
                 id="cidade"
                 type="text"
                 placeholder="Digite sua cidade"
@@ -241,7 +265,7 @@ export const Cadastrar = () => {
             <LabelInput>
               <label htmlFor="estado">Estado*</label>
               <input
-                {...register("estado")}
+                {...register('estado')}
                 id="estado"
                 type="text"
                 placeholder="Digite sua UF"
@@ -253,9 +277,12 @@ export const Cadastrar = () => {
           </CadastrarStyled>
         </FormCadastro>
         <CadastrarStyled>
-          <Button onClick={handleSubmit}>Cadastrar</Button>
+          <Button onClick={handleSubmit}>
+            {authenticated ? <h3>Editar</h3> : <h3>Cadastrar</h3>}
+          </Button>
         </CadastrarStyled>
       </form>
+      <ToastContainer />
     </Paper>
   );
 };

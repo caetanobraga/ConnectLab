@@ -6,5 +6,5 @@ export const MainStyled = styled.div`
   min-height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
-  align-items: center;
+  //align-items: start;
 `;

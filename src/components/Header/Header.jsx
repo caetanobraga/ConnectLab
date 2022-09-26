@@ -1,10 +1,17 @@
-import { HeaderStyled } from "./Header.styles";
-import PropTypes from "prop-types";
+import { HeaderContainerStyled, HeaderStyled } from './Header.styles';
+import { Container } from '../Container/Container';
+import { NavBar } from '../NavBar/NavBar';
+import { Titulo } from '../Titulo/Titulo';
 
-export const Header = ({ children }) => {
-  return <HeaderStyled>{children}</HeaderStyled>;
-};
-
-Header.propTypes = {
-  children: PropTypes.node.isRequired,
+export const Header = () => {
+  return (
+    <HeaderStyled>
+      <Container>
+        <HeaderContainerStyled>
+          <Titulo>Connect Lab</Titulo>
+          <NavBar />
+        </HeaderContainerStyled>
+      </Container>
+    </HeaderStyled>
+  );
 };

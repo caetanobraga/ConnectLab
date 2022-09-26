@@ -9,6 +9,7 @@ export const ListaProdutoStyled = styled.div`
 
   & li {
     width: 30%;
+    min-width: 300px;
     list-style-type: none;
   }
 

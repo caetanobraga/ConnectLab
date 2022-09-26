@@ -1,37 +1,26 @@
-import { useEffect, useState } from 'react';
 import { CardProduto } from '../index';
-import { getDevices } from '../../utils/api';
+import { Button } from '../../components';
+
 import { ListaProdutoStyled } from './ListaProduto.styles';
+import PropTypes, { object } from 'prop-types';
 
-export const ListaProdutos = () => {
-  const [devices, setDevices] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const addDevice = () => {
-    console.log('adicionou');
-  };
-
-  useEffect(() => {
-    (async () => {
-      const response = await getDevices();
-      setDevices(response.data);
-      setLoading(false);
-    })();
-  }, []);
-
-  if (loading) {
-    return <h1>Carregando...</h1>;
-  }
-
+export const ListaProduto = ({ devices, abreModal }) => {
   return (
     <ListaProdutoStyled>
       <ul>
         {devices.map((device) => (
           <li key={device._id}>
-            <CardProduto produto={device} addDevice={addDevice}></CardProduto>
+            <CardProduto produto={device} abreModal={abreModal}>
+              <Button onClick={() => abreModal(device)}>Adicionar</Button>
+            </CardProduto>
           </li>
         ))}
       </ul>
     </ListaProdutoStyled>
   );
+};
+
+ListaProduto.propTypes = {
+  devices: PropTypes.arrayOf(object).isRequired,
+  abreModal: PropTypes.func.isRequired,
 };

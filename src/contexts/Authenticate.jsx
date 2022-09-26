@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('token', token);
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
-    console.log(api);
     setUser(loggedUser);
     navigate('/');
   };

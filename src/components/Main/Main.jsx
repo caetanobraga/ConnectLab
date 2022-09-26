@@ -1,8 +1,8 @@
-import { MainStyled } from "./Main.styles";
-import PropTypes from "prop-types";
+import { MainStyled } from './Main.styles';
+import PropTypes from 'prop-types';
 
 export const Main = ({ children }) => {
-  return <MainStyled>{children} </MainStyled>;
+  return <MainStyled> {children} </MainStyled>;
 };
 
 Main.propTypes = {
