@@ -72,16 +72,22 @@ export const Cadastrar = () => {
       const logedUser = JSON.parse(localStorage.getItem('user'));
       const token = localStorage.getItem('token');
 
-      const Headers = {
-        headers: 'Bearer ' + token,
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       };
 
+      console.log(body);
+
+      console.log(baseURL + 'users/' + logedUser.id, { body }, { headers });
+
       axios
-        .put(baseURL + 'users/' + logedUser.id, body, Headers)
+        .put(baseURL + 'users/' + logedUser.id, { body }, { headers })
         .then((response) => {
           console.log(response);
         })
         .catch((erro) => {
+          console.log(erro);
           console.log(erro.response.data.error);
           notifyError(erro.response.data.error);
         });
@@ -97,8 +103,6 @@ export const Cadastrar = () => {
         console.log(erro.response.data.error);
         notifyError(erro.response.data.error);
       });
-
-    console.log(body);
   };
 
   const buscaCep = (e) => {
