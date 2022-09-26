@@ -8,6 +8,7 @@ import { Button, LabelInput, Paper } from '../../components';
 import { CadastrarStyled, FormCadastro } from './Cadastrar.styles';
 import { ToastContainer } from 'react-toastify';
 import { notifyError } from '../../utils';
+import { Navigate } from 'react-router-dom';
 
 const campoObrigatorio = 'Campo obrigatório';
 const baseURL = 'https://connectlab.onrender.com/';
@@ -97,14 +98,13 @@ export const Cadastrar = () => {
     axios
       .post(baseURL + 'auth/register/', body, headers)
       .then((response) => {
-        console.log(response);
+        return response;
       })
       .catch((erro) => {
-        console.log(erro.response.data.error);
         notifyError(erro.response.data.error);
       });
   };
-
+  <Navigate to="/" />;
   const buscaCep = (e) => {
     if (!e.target.value) {
       return;

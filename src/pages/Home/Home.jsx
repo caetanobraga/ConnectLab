@@ -20,8 +20,8 @@ export const Home = () => {
   useEffect(() => {
     (async () => {
       const response = await getUsersDevices(userId.id);
-      if (response.data.error) {
-        console.log(response.data.error);
+      if (response) {
+        console.log(response);
         return;
       }
       setDevices(response.data);

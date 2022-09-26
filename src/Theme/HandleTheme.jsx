@@ -1,12 +1,6 @@
-import { Button } from "../components"
+import { Button } from '../components';
 
-
- export const HandleTheme = (theme) => {
-    return(
-    <Button onClick={() => !theme }>
-       Troca cor
-    </Button>
-    )
-
- }
-       
+import { ThemeProvider } from 'styled-components';
+export const HandleTheme = (theme) => {
+  return <Button onClick={(setTheme) => !theme}>Troca cor</Button>;
+};

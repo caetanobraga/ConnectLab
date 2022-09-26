@@ -8,4 +8,15 @@ export const NavBarStyled = styled.div`
   & Link {
     text-decoration: none;
   }
+
+  & Button {
+    border: 1px solid;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bolder;
+    color: #351010;
+  }
+  & a {
+    color: #351010;
+  }
 `;
