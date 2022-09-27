@@ -104,7 +104,7 @@ export const Cadastrar = () => {
         notifyError(erro.response.data.error);
       });
   };
-  <Navigate to="/" />;
+  <Navigate to="/"></Navigate>;
   const buscaCep = (e) => {
     if (!e.target.value) {
       return;

@@ -21,8 +21,8 @@ export const Home = () => {
     (async () => {
       const response = await getUsersDevices(userId.id);
       if (response) {
-        console.log(response);
-        return;
+        // console.log(response);
+        // return;
       }
       setDevices(response.data);
       setLoading(false);
