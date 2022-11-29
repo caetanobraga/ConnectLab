@@ -19,7 +19,7 @@ export const Perfil = () => {
       setUser(response.data);
       setLoading(false);
     })();
-  }, []);
+  }, [userId.id]);
 
   if (loading) {
     return <h1>Carregando...</h1>;

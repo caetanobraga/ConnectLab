@@ -12,18 +12,13 @@ import {
 export const Home = () => {
   const [devices, setDevices] = useState();
   const [loading, setLoading] = useState(true);
-
-  const [deviceSelected, setDeviceSelected] = useState(null);
-
   const userId = JSON.parse(localStorage.getItem('user'));
+
+  const [deviceSelected, setDeviceSelected] = useState('');
 
   useEffect(() => {
     (async () => {
       const response = await getUsersDevices(userId.id);
-      if (response) {
-        // console.log(response);
-        // return;
-      }
       setDevices(response.data);
       setLoading(false);
     })();
@@ -59,7 +54,9 @@ export const Home = () => {
         isOpen={Boolean(deviceSelected)}
         close={() => setDeviceSelected(false)}
       >
-        <h1>.</h1>
+        {console.log(deviceSelected)}
+        <h1>teste</h1>
+        <h4>{deviceSelected.device.name}</h4>
       </Modal>
     </Container>
   );

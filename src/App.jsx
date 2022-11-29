@@ -8,6 +8,7 @@ import { AppRoutes } from './routes/AppRoutes';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/Authenticate';
 import { AppStyled } from './App.styles';
+import { Footer } from './components/Footer/footer';
 
 function App() {
   const [theme, setTheme] = useState('dark');
@@ -22,6 +23,7 @@ function App() {
           <Main>
             <AppRoutes></AppRoutes>
           </Main>
+          <Footer />
         </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>

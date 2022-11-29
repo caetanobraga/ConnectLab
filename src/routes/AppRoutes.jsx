@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { Cadastrar, Login, Home, Dispositivos, Perfil } from '../pages';
 import { Private } from './Private';

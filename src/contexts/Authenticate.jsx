@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-import { api, createLogin } from '../utils/api';
+import { createLogin } from '../utils/api';
 
 export const AuthContext = createContext();
 
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(loggedUser));
     localStorage.setItem('token', token);
 
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+    // api.defaults.headers.Authorization = `Bearer ${token}`;
     setUser(loggedUser);
     navigate('/');
   };
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    api.defaults.headers.Authorization = null;
+    // api.defaults.headers.Authorization = null;
     setUser(null);
     navigate('/login');
   };
