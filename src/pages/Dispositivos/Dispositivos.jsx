@@ -136,6 +136,7 @@ export const Dispositivos = () => {
                 <span>{formState.errors.local.message}</span>
               )}
             </LabelInput>
+            <h5>Local</h5>
             <LabelInput>
               <input {...register('comodo')} type="text" id="comodo"></input>
               {formState.errors.comodo && (
